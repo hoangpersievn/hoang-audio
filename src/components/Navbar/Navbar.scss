@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
+
+li, a, button {
+    color : #edf0f1;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    list-style: none;
+}
+
+header {
+    background: #24252A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding : 10px 5%;
+    
+    .logo {
+        letter-spacing: 5px;
+        font-size: 20px;
+        cursor: pointer;
+        color : #e2e2e2;
+    }
+
+    .search {
+        position: relative;
+        display : flex;
+        transition: all 0.3s ease 0s;
+        width: 20%;
+        i {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateX(-5%) translateY(-50%);
+            color: #f1f1f1;
+        }
+        .search-input {
+            padding: 0 0 0 48px;
+            height: 35px;
+            width: 400px;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease 0s;
+            background: #24252A;
+            color : #595f6e;
+            border : none;
+            border-bottom: 1px solid #5fa8d3;
+        }
+    }
+
+    nav {
+        width: 60%;
+    }
+    .nav-links {
+        display: flex;
+        justify-content: flex-end;
+        li {
+            display : flex;
+            padding : 0 20px;
+            justify-content: center;
+            align-items: center;
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-transform: uppercase;
+                transition: all 0.3s ease 0s;
+                &:hover {
+                    color : #0088a9;
+                }
+                span {
+                    margin: 0 4px;
+                }
+                img {
+                    width: 23px;
+                    height: 23px;
+                }
+            }
+        }
+        .active {
+            a {
+                color: #0088a9;
+            }
+        }
+    }
+
+    .burger {
+        cursor: pointer;
+        display: none;
+        div {
+            width : 25px;
+            height: 3px;
+            background : #e2e2e2;
+            margin : 5px;
+            transition: all 0.3s ease 0s;
+        }
+    }
+}
+
+@media screen and (max-width : 798px ) {
+    body {
+        overflow: hidden;
+    }
+
+    header {
+        height: 13vh;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        .logo {
+            position : absolute;
+            top : -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .search {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .nav-links {
+            width : 30%;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            position : absolute;
+            top: 13vh;
+            right: 0;
+            background: #24252A;
+            justify-content: space-around;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.5s ease 0s;
+            z-index: 100;
+            li {
+                opacity: 0;
+            }
+        }
+        .nav-fade {
+            transform: translateX(0%);
+        }
+
+        .burger {
+            display: block;
+            margin: 0 2vh;
+            
+        }
+        .burger-toggle {
+            transition : all 0.3s ease 0s;
+            .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .line2 {
+                opacity: 0;
+            }
+            .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+    }
+
+    @keyframes navLinkFade {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+}

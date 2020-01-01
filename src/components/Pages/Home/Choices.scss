@@ -1,0 +1,86 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: #f7f6ff;
+}
+
+.container {
+    margin-top: 100px;
+    padding: 32px;
+}
+
+
+.select-box {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    .selected {
+        padding: 12px 24px;
+        border-radius: 8px;
+        background: #2f3640;
+        color: #f5f6fa;
+        cursor: pointer;
+        margin-bottom: 8px;
+        position: relative;
+        order: 0;
+        i {
+            float: right;
+            transition: all 0.4s ease 0s;
+        }
+    }
+
+    .options-container.active {
+        max-height: 182px;
+        opacity: 1;
+        overflow-y: scroll;
+    }
+
+    .options-container {
+        background: #2f3640;
+        color: #f5f6fa;
+        width: 100%;
+        transition: all 0.4s ease 0s;
+        border-radius: 8px;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        order: 1;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            background: #0d141f;
+            border-radius: 0 8px 8px 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background:#525861;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .option {
+            @extend .selected;
+
+            &:hover {
+                background: #414b57;
+            }
+
+            .radio {
+                display: none;
+            }
+
+            label {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.options-container.active + .selected i {
+    transform: rotate(180deg);
+}

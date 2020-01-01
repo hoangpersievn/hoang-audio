@@ -1,26 +1,81 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import * as Containers from './containers/index';
+import { publicRoutes, privateRoutes } from './routes';
+import { logOut } from './actions/authen';
+import PrivateRoute from './PrivateRoute';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+
+    showRoutes = (routes) => {
+        let result = "";
+
+        if (routes.length > 0) {
+            result = routes.map((route, index) => {
+                return (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        component={route.main}
+                    />
+                );
+            });
+        }
+        return result;
+    };
+
+    showPrivateRoutes = (routes) => {
+        let result = "";
+
+        if(routes.length > 0) {
+            result = routes.map((route, index) => {
+                return (
+                    <PrivateRoute
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        component={route.main}
+                    />
+                )
+            });
+        };
+        return result;
+    };
+
+    render() {
+        const { isAuthenticated, user, logOut } = this.props;
+
+        return (
+            <Router>
+                <div className="App">
+                    <Navbar isAuthenticated={isAuthenticated} logOut={logOut} user={user}/>
+                    <Switch>
+                        {this.showRoutes(publicRoutes)}
+                        {this.showPrivateRoutes(privateRoutes)}
+                        
+                    </Switch>
+                    <Containers.QueueContainer />
+                    <Containers.PlayerContainer />
+                    <Containers.ModalContainer/>
+                </div>
+            </Router>
+        );
+    };
 }
 
-export default App;
+const mapStateToProps = state => {
+    const { authenState } = state;
+    return {
+        isAuthenticated: authenState.isAuthenticated,
+        user: authenState.user
+    };
+
+};
+
+export default connect(mapStateToProps, {
+    logOut
+})(App);

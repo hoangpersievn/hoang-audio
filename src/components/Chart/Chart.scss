@@ -1,0 +1,292 @@
+@mixin box-shadow() {
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+}
+
+p,
+a {
+    font-family: "Open Sans", sans-serif
+}
+
+.chart-img {
+    width: 20px;
+    height: 20px;
+}
+
+.chart-panel {
+    height: 50px;
+    margin-bottom: 10px;
+
+    button.chart-panel-btn {
+        outline: none;
+        background: none;
+        border: none;
+        height: 100%;
+        width: calc(100% / 3);
+        cursor: pointer;
+        float: left;
+        color: #5d6d7e;
+
+        &:hover {
+            border: 1px solid #27ded5;
+        }
+    }
+
+    button.chart-panel-btn.active {
+        background-image: linear-gradient(to right, #02b3e4 0%, #02ccba 100%);
+        color: #fff !important;
+    }
+}
+
+.chart {
+    @include box-shadow();
+
+    .featured-image {
+        height: 140px;
+
+        .bgImageContainer {
+            background-image: url("https://loremflickr.com/320/240?random=1");
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+        }
+    }
+
+    .chart-list {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        margin-top: -64px;
+
+        .chart-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0px;
+            border-bottom: 1px solid #f2f2f2;
+            padding: 0 0 4px 0;
+            position: relative;
+
+            &:first-child {
+                border-bottom: none;
+            }
+
+            &-thumb {
+                width: 102px;
+                height: 80px;
+                padding: 10px;
+                transition: all 0.3s ease 0s;
+                position: relative;
+
+                &:hover {
+                    img {
+                        opacity: 0.2;
+                    }
+
+                    i {
+                        display: block;
+
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 3px;
+                    cursor: pointer;
+
+                }
+
+                i {
+                    display: none;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    color: #333;
+                    transform: translate(-50%, -50%);
+                    cursor: pointer;
+                }
+            }
+
+            &-order {
+                width: 20%;
+                line-height: 60px;
+                text-align: center;
+            }
+
+            &-info {
+                width: 80%;
+                color: #888;
+            }
+
+            &-artist {
+                a {
+                    text-decoration: none;
+                    font-size: 12px;
+                    color: #3eb4bf;
+                    transition: all 0.3s ease 0s;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &-title {
+                a {
+                    text-decoration: none;
+                    font-size: 14px;
+                    color: #888;
+                    transition: all 0.3s ease 0s;
+                }
+            }
+
+            &-detail {
+                width: 100%;
+                display: flex;
+                height: 100%;
+                align-items: center;
+
+                &-left {
+                    width: 80%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+
+                &-right {
+                    width: 20%;
+                    height: 100%;
+
+                    button.sc-ir {
+                        i {
+                            font-size: 17px;
+                            color: #3eb4bf;
+                        }
+                    }
+                }
+            }
+
+            &:first-child {
+                .dropdown-box {
+                    bottom: -129px;
+                    right: 50px;
+                }
+            }
+
+            .dropdown-box {
+                position: absolute;
+                z-index: 100;
+                bottom: -123px;
+                right: 34px;
+            }
+
+            .lazyload-img {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+.detail-first {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
+    padding-top: 0 !important;
+
+    .chart-item-info {
+        padding-left: 20px;
+
+        .chart-item-title {
+            a {
+                color: white !important;
+
+                &:hover {
+                    color: #3eb4bf !important;
+
+                }
+            }
+        }
+
+        .chart-item-artist {
+            a {
+                color: white !important;
+
+                &:hover {
+                    color: #3eb4bf !important;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .chart-item-detail-right {
+        button.sc-ir {
+            i {
+                font-size: 17px;
+                color: #fff !important;
+            }
+        }
+    }
+}
+
+.order-first {
+    background-image: linear-gradient(to right, #02b3e4 0%, #02ccba 100%);
+    color: #fff;
+    font-size: 25px !important;
+    position: relative;
+    .lazyload-img {
+        width: 100%;
+        height: 100%;
+        margin-left: 0 !important;
+        border-radius: 0 !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        img {
+            display: none;
+            border-radius: 0 !important;
+        }
+    }
+}
+
+.chart-more {
+
+    box-sizing: border-box;
+    position: absolute;
+    top: 56px;
+    z-index: 300;
+    right: 57px;
+
+    .more-box {
+        opacity: 0;
+        max-height: 0;
+        transition: all 0.4s ease 0s;
+    }
+}
+
+.chart-more.active {
+    .more-box {
+        max-height: 150px;
+        opacity: 1;
+    }
+}
+
+button.sc-ir {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 2px 11px 2px 10px;
+    cursor: pointer;
+    color: #333;
+    white-space: nowrap;
+    font-weight: 100;
+    text-align: center;
+    vertical-align: baseline;
+    outline: none;
+    opacity: 0.5;
+    transition: opacity 0.4s ease 0s;
+    border: none;
+    background: none;
+}
